@@ -1,0 +1,2 @@
+- Play with routes and route extensions ex. /hello/ /hello/2
+- Order of the routes matters
