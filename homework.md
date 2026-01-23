@@ -1,2 +1,13 @@
 - Play with routes and route extensions ex. /hello/ /hello/2
 - Order of the routes matters
+
+- Handling Multiple Route handlers and play with the code
+- next()
+- next function and errors along with res.send()
+- app.use("/route", [(r1),(r2),(r3)],(r4),(r5))
+- wWat is a middleware? Why do we need it?
+- How express JS basically handles requests behind the scenes
+- Difference app.use and app.all
+- Write a dummy auth middleware for admin
+- Write a dummy auth middleware for user
+- Error Handling useing app.use("/", (err,req,res,next)=>{})
