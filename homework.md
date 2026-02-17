@@ -7,3 +7,7 @@
 - Connect your application to the Database
 - Call the connectDB() function and connect to database before starting the application on 3000 port.
 - Create a userSchema
+
+- find out difference between json and js object
+- Add the express.json middleware to your app
+- Make your signup API dynamic to recive data from the end user.
