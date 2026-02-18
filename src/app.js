@@ -47,14 +47,22 @@ app.get("/feed", async(req,res)=>{
         res.status(400).send("Cannot fetech all the details");
     }
 })
-
-
 //update the user
 
-app.patch("/user", async(req,res)=>{
-    const userId = req.body.userId;
+app.patch("/user/:userId", async(req,res)=>{
+    const userId = req.params?.userId;
+    const data = req.body;
     try{
-        const user = await User.findByIdAndUpdate(userId,{firstName:"DumpaBhargav"});
+        const ALLOWED_UPDATES = ["about","gender","age","skills"];
+        const isUpdateAllowed = Object.keys(data).every((k)=>
+            ALLOWED_UPDATES.includes(k));
+        if(!isUpdateAllowed){
+            throw new Error("Update not allowed");
+        }
+        if(data?.skills.length > 10){
+            throw new Error("Skills cannont be more that ten");
+        }
+        const user = await User.findByIdAndUpdate(userId,data,{runValidators:true});
         res.send("Updated name successfully");
     } catch(err){
         res.status(400).send("Cannot update the user");
