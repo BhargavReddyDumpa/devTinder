@@ -11,3 +11,6 @@
 - find out difference between json and js object
 - Add the express.json middleware to your app
 - Make your signup API dynamic to recive data from the end user.
+
+- API-get user by email
+- API- Get all the users form teh database

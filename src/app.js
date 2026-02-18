@@ -19,6 +19,47 @@ app.post("/signup", async (req, res)=>{
 
 })
 
+app.delete("/user", async(req,res)=>{
+    const userId = req.body.userId;
+    try{
+        const user = await User.findByIdAndDelete({_id:userId});
+        res.send(user);
+    } catch(err){
+        res.status(400).send("Cannot delete the user");
+    }
+})
+
+app.get("/user", async (req, res)=>{
+    const userEmail = req.body.emailId;
+    try{
+        const user = await User.findOne({emailId: userEmail});
+        res.send(user);
+    } catch(err){
+        res.status(400).send("Cannont get the data", err.message);
+    }
+})
+
+app.get("/feed", async(req,res)=>{
+    try{
+        const user = await User.find({});
+        res.send(user);
+    } catch(err){
+        res.status(400).send("Cannot fetech all the details");
+    }
+})
+
+
+//update the user
+
+app.patch("/user", async(req,res)=>{
+    const userId = req.body.userId;
+    try{
+        const user = await User.findByIdAndUpdate(userId,{firstName:"DumpaBhargav"});
+        res.send("Updated name successfully");
+    } catch(err){
+        res.status(400).send("Cannot update the user");
+    }
+})
 
 connectDB()
     .then(()=>{
