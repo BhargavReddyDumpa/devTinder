@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken")
 const User = require("../models/user")
-
-
+// cookie parsing handled in app.js; no need to require here
 
 const userAuth = async (req, res, next)=>{
     try{
+    console.log(req.cookies);
     const {token} = req.cookies;
     if(!token){
         throw new Error("Token not valid");

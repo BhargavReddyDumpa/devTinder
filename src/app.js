@@ -5,7 +5,12 @@ const profileRouter = require("./routes/profile.js");
 const requestRouter = require("./routes/request.js");
 const app = express();
 
+// parse incoming JSON bodies
 app.use(express.json());
+
+// enable cookie parsing for auth routes
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 app.use("/",authRouter);
 app.use("/",profileRouter);

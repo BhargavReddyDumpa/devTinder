@@ -1,5 +1,6 @@
 const express = require("express");
 const {userAuth} = require("../middlewares/auth");
+// cookie-parser middleware is applied globally in app.js
 
 const profileRouter = express.Router();
 
