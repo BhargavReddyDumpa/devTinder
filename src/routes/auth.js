@@ -3,13 +3,15 @@ const { validateSignUpData } = require("../utils/validation.js");
 const authRouter = express.Router();
 const User = require("../models/user.js");
 const bcrypt = require("bcrypt");
+const {userAuth} = require("../middlewares/auth");
+
 
 authRouter.post("/signup", async (req, res)=>{
     //validation of data
     try{
         validateSignUpData(req)
         //encrypt the password
-        const {firstName, lastName, emailId, password} = req.body;
+        const {firstName, lastName, emailId, password,gender,about,skills} = req.body;
         const passwordHash = await bcrypt.hash(password,10);
         console.log(passwordHash);
         const user = new User({
@@ -17,6 +19,9 @@ authRouter.post("/signup", async (req, res)=>{
             lastName,
             emailId,
             password: passwordHash,
+            gender,
+            about,
+            skills
         });
             await user.save();
             res.send("User saved successfully");
@@ -37,7 +42,9 @@ authRouter.post("/login", async(req,res)=>{
         const passwordHash = await user.validatepassword(password);
         if(passwordHash){
             const token = await user.getjwt();
-            res.cookie("token",token);
+            res.cookie("token",token, {
+                expires:new Date(Date.now() + 8 * 360000), // 8 hours
+            });
             res.send("Login Successfull");
         }
         else{
@@ -50,7 +57,12 @@ authRouter.post("/login", async(req,res)=>{
 });
 
 authRouter.post("/logout", async(req,res)=>{
-    
+    //res.clearCookie('cookieName');
+    // res.clearCookie("token");
+    res.cookie("token",null,{
+        expires: new Date(Date.now()),
+    })
+    res.send("Logged out successfully");
 })
 
 
