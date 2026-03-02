@@ -70,7 +70,7 @@ requestRouter.post("/request/review/:status/:requestId", userAuth, async (req,re
         const connectionRequest = await ConnectionRequest.findOne({
             _id: requestId,
             toUserId: loggedinUser._id,
-            status: "interested"
+            status: "interested",
         })
         if(!connectionRequest){
             return res.status(400).json({
