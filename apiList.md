@@ -14,6 +14,7 @@
 - POST /request/review/accepted/:requestId
 - POST /request/review/rejected/:requestId
 
+## user Router
 - GET /user/connections
 - GET /requests/received
 - GET /feed - Gets you the profiles of other users
